@@ -33,7 +33,7 @@ $app->match('/form', function(Request $request) use($app) {
     $form = $app['form.factory']->createBuilder('form', $data)
         ->add('name','text', array(
 		'constraints' => array(
-
+			new Assert\NotBlank()
 			)
 		)			
 	)
@@ -51,6 +51,7 @@ $app->match('/form', function(Request $request) use($app) {
         $data = $form->getData();
 
         // do something with the data
+	var_dump($data);
 
         // redirect somewhere
 	return 'Redirect to implement';
