@@ -2,8 +2,5 @@
 
 {% block content %}
 <h1>formulaire</h1>
-<form action="#" method="post">
-	{{ form_widget(form) }}
-	<input type="submit" value="generate" />
-</form>
+	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
 {% endblock %}

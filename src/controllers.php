@@ -5,15 +5,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Silex\Provider\FormServiceProvider;
-//use Symfony\Component\Locale;
-use Silex\Provider\TranslationServiceProvider;
 
+use Silex\Provider\FormServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
+use Symfony\Component\Validator\Constraints as Assert;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 
 $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider());
+$app->register(new ValidatorServiceProvider());
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
@@ -29,12 +31,18 @@ $app->match('/form', function(Request $request) use($app) {
     );
 
     $form = $app['form.factory']->createBuilder('form', $data)
-        ->add('name')
+        ->add('name','text', array(
+		'constraints' => array(
+
+			)
+		)			
+	)
         ->add('email')
         ->add('gender', 'choice', array(
             'choices' => array(1 => 'male', 2 => 'female'),
             'expanded' => true,
         ))
+	->add('save', 'submit')
         ->getForm();
 
     $form->handleRequest($request);
