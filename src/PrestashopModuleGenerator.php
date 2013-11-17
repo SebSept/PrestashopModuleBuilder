@@ -10,8 +10,8 @@ class PrestashopModuleGenerator
 	*
 	* @return mixed bool|string False if failled, url to generated file if success
 	**/
-	public static function generate($data)
+	public function generate($data)
 	{
-		return false;
+		return true;
 	}
 }

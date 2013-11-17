@@ -16,6 +16,8 @@ $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider());
 $app->register(new ValidatorServiceProvider());
 
+$app['PrestashopModuleGenerator'] = function() { return new PrestashopModuleGenerator(); };
+
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
 })
@@ -53,8 +55,9 @@ $app->match('/form', function(Request $request) use($app)
 
         // do something with the data
         // var_dump($data);
+
         
-        $res = PrestashopModuleGenerator::generate($data);
+        $res = $app['PrestashopModuleGenerator']->generate($data);
         var_dump($res);
 
         // redirect somewhere
