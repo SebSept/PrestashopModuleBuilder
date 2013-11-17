@@ -12,7 +12,6 @@ use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Validator\Constraints as Assert;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
-
 $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider());
 $app->register(new ValidatorServiceProvider());
@@ -23,38 +22,43 @@ $app->get('/', function () use ($app) {
 ->bind('homepage')
 ;
 
-$app->match('/form', function(Request $request) use($app) {
+$app->match('/form', function(Request $request) use($app) 
+{
 // some default data for when the form is displayed the first time
     $data = array(
         'name' => 'Your name',
         'email' => 'Your email',
-    );
+        );
 
     $form = $app['form.factory']->createBuilder('form', $data)
-        ->add('name','text', array(
-		'constraints' => array(
-			new Assert\NotBlank()
-			)
-		)			
-	)
-        ->add('email')
-        ->add('gender', 'choice', array(
-            'choices' => array(1 => 'male', 2 => 'female'),
-            'expanded' => true,
+    ->add('name','text', array(
+      'constraints' => array(
+         new Assert\NotBlank()
+         )
+      )			
+    )
+    ->add('email')
+    ->add('gender', 'choice', array(
+        'choices' => array(1 => 'male', 2 => 'female'),
+        'expanded' => true,
         ))
-	->add('save', 'submit')
-        ->getForm();
+    ->add('save', 'submit')
+    ->getForm();
 
     $form->handleRequest($request);
 
-    if ($form->isValid()) {
+    if ($form->isValid()) 
+    {
         $data = $form->getData();
 
         // do something with the data
-	var_dump($data);
+        // var_dump($data);
+        
+        $res = PrestashopModuleGenerator::generate($data);
+        var_dump($res);
 
         // redirect somewhere
-	return 'Redirect to implement';
+        return 'Redirect to implement';
         // return $app->redirect('...');
     }
 
@@ -73,7 +77,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
         'errors/'.substr($code, 0, 2).'x.html',
         'errors/'.substr($code, 0, 1).'xx.html',
         'errors/default.html',
-    );
+        );
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
