@@ -16,7 +16,7 @@ class {{ name }} extends Module
     {
         $this->name = '{{ name|lower }}';
         $this->tab = '{{ tab }}';
-        $this->need_instance = {{ need_instance }};
+        $this->need_instance = {% if need_instance == false %}0{% else %}1{% endif %};
 
         parent::__construct();
 
@@ -35,7 +35,7 @@ class {{ name }} extends Module
         return parent::install() 
             && $this->dbInstall() 
 {% for element_key, element_value in form if element_value == 1 %}
-            && registerHook('{{ element_key }}')
+            && $this->registerHook('{{ element_key }}')
 {% endfor %}            ;
  	}
 
