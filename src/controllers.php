@@ -58,6 +58,12 @@ $app->match('/form', function(Request $request) use($app)
     }
     // insert hooks into main form builder
     $form_builder->add($hooks_builder);
+
+    // has a configuration form in admin ?
+    $form_builder->add('has_config', 'checkbox', 
+        array(  'label' => 'Has an admin page ? (to change module parameters or content)',
+                'required' => false,
+            ));
     // save button
     $form_builder->add('save', 'submit');
 
