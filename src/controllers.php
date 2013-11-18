@@ -45,7 +45,7 @@ $app->match('/form', function(Request $request) use($app)
     ->add('displayName')
     ->add('description')
     ->add('author')
-    ->add('tab')
+    ->add('tab', 'choice', array('choices' => $app['PrestashopModuleGenerator']::getTabs() ))
     ->add('need_instance', 'checkbox', array('required' => false))
     ->add('version');
 

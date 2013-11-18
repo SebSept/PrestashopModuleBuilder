@@ -116,6 +116,10 @@ class PrestashopModuleGenerator
 		array('name' => 'actionObjectProductDeleteAfter','title' => 'actionObjectProductDeleteAfter','description' => '')
 	);
 
+	protected static $tabs = array('administration', 'advertising_marketing', 'analytics_stats', 'billing_invoicing', 'checkout',
+		'front_office_features', 'migration_tools', 'payments_gateways', 'payment_security', 'pricing_promotion', 'search_filter',
+		'seo', 'shipping_logistics', 'smart_shopping', 'market_place', 'mobile', 'custom');
+
 	public function __construct($app)
 	{
 		$filter = new Twig_SimpleFilter('ucfirst', 'ucfirst');
@@ -126,7 +130,7 @@ class PrestashopModuleGenerator
 	/**
 	*
 	* @return mixed bool|string False if failled, url to generated file if success
-	**/
+	*/
 	public function generate($data)
 	{
 		// $this->twig->loadTemplate('module.php.twig');
@@ -137,16 +141,18 @@ class PrestashopModuleGenerator
 	/**
 	* Hooks list array formated as [<name> => <name>, ...]
 	* @return array [<name> => <name>, ...]
-	**/
+	*/
 	public static function getHooksListData()
 	{
-		// $r = array();
-		// foreach(self::$hooks AS $h)
-		// 	$r[] = array('label' => $h['name'], 'data' => $h['name']);
+		return  array_combine(array_column(self::$hooks, 'name'), array_column(self::$hooks, 'name'));
+	}
 
-		// return $r;
-		return  array_combine ( array_column(self::$hooks, 'name') , array_column(self::$hooks, 'name')  );
-		// array_fill_keys ( array $keys , mixed $value )
-
+	/**
+	* Module tabs list
+	* @return array [<tab_id>, ... ]
+	*/
+	public static function getTabs()
+	{
+		return array_combine (self::$tabs, self::$tabs);
 	}
 }
