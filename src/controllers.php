@@ -17,6 +17,7 @@ $app->register(new TranslationServiceProvider());
 $app->register(new ValidatorServiceProvider());
 
 $app['PrestashopModuleGenerator'] = function($app) { return new PrestashopModuleGenerator($app); };
+$app['highlighter'] = function() { return new FSHL\Highlighter(new \FSHL\Output\Html());} ;
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
@@ -79,19 +80,19 @@ $app->match('/form', function(Request $request) use($app)
     {
         $data = $form->getData();
         // var_dump($data);
-        // methode direct
-        // $module_class_code = $app['twig']->render('module.php.twig', $data);
         
         // methode via PrestashopModuleGenerator
         $module_class_code = $app['PrestashopModuleGenerator']->generate($data);
-        $page = $app['twig']->render('module.html', array('module_class_code' => $module_class_code));
 
+        // output result to a file, for debuging
         if(defined('DEBUG_TO_FILE') && DEBUG_TO_FILE)
             file_put_contents(DEBUG_TO_FILE, $module_class_code);
-        
+
+        // highlight code and output
+        $module_class_code = $app['highlighter']->setLexer(new \FSHL\Lexer\Php())->highlight($module_class_code);
+        $page = $app['twig']->render('module.html', array('module_class_code' => $module_class_code));
+
         return $page;
-        // return 'Redirect to implement';
-        // return $app->redirect('...');
     }
 
     // display the form
