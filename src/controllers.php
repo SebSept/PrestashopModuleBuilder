@@ -86,6 +86,9 @@ $app->match('/form', function(Request $request) use($app)
         $module_class_code = $app['PrestashopModuleGenerator']->generate($data);
         $page = $app['twig']->render('module.html', array('module_class_code' => $module_class_code));
 
+        if(defined('DEBUG_TO_FILE') && DEBUG_TO_FILE)
+            file_put_contents(DEBUG_TO_FILE, $module_class_code);
+        
         return $page;
         // return 'Redirect to implement';
         // return $app->redirect('...');
