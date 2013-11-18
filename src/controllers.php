@@ -16,7 +16,7 @@ $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider());
 $app->register(new ValidatorServiceProvider());
 
-$app['PrestashopModuleGenerator'] = function() { return new PrestashopModuleGenerator(); };
+$app['PrestashopModuleGenerator'] = function($app) { return new PrestashopModuleGenerator($app); };
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
@@ -26,42 +26,57 @@ $app->get('/', function () use ($app) {
 
 $app->match('/form', function(Request $request) use($app) 
 {
-// some default data for when the form is displayed the first time
+    // some default data for when the form is displayed the first time
     $data = array(
-        'name' => 'Your name',
-        'email' => 'Your email',
+        'need_instance' => false,
+        'version' => '0.1',
         );
+    // $data['hooks'] = $app['PrestashopModuleGenerator']::getHooksListData();
 
-    $form = $app['form.factory']->createBuilder('form', $data)
+    $form_builder = $app['form.factory']->createBuilder('form', $data)
     ->add('name','text', array(
-      'constraints' => array(
-         new Assert\NotBlank()
+        'label' => 'Module Class name',
+        'constraints' => array(
+         new Assert\NotBlank(),
+         // @todo assert is a regular class name
          )
       )			
     )
-    ->add('email')
-    ->add('gender', 'choice', array(
-        'choices' => array(1 => 'male', 2 => 'female'),
-        'expanded' => true,
-        ))
-    ->add('save', 'submit')
-    ->getForm();
+    ->add('displayName')
+    ->add('description')
+    ->add('author')
+    ->add('tab')
+    ->add('need_instance', 'checkbox', array('required' => false))
+    ->add('version');
 
+    // hooks
+    $hooks_builder = $app['form.factory']->createBuilder('form', null, array('label' => 'Hooks' /*, 'block_name' => 'myname1'*/ ));
+
+    foreach($app['PrestashopModuleGenerator']::getHooksListData() AS $hook)
+    {
+        $hooks_builder->add($hook, 'checkbox', array('label' => $hook,'required' => false )) ;
+    }
+    // insert hooks into main form builder
+    $form_builder->add($hooks_builder);
+    // save button
+    $form_builder->add('save', 'submit');
+
+    $form = $form_builder->getForm();
     $form->handleRequest($request);
 
     if ($form->isValid()) 
     {
         $data = $form->getData();
-
-        // do something with the data
         // var_dump($data);
-
+        // methode direct
+        // $module_class_code = $app['twig']->render('module.php.twig', $data);
         
-        $res = $app['PrestashopModuleGenerator']->generate($data);
-        var_dump($res);
+        // methode via PrestashopModuleGenerator
+        $module_class_code = $app['PrestashopModuleGenerator']->generate($data);
+        $page = $app['twig']->render('module.html', array('module_class_code' => $module_class_code));
 
-        // redirect somewhere
-        return 'Redirect to implement';
+        return $page;
+        // return 'Redirect to implement';
         // return $app->redirect('...');
     }
 
