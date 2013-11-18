@@ -30,8 +30,13 @@ $app->match('/form', function(Request $request) use($app)
     $data = array(
         'need_instance' => false,
         'version' => '0.1',
+        // dev values
+        'name' => 'MyModule',
+        'displayName' => 'My module to foo',
+        'description' => 'adds a bar on each fu',
+        'author' => 'Module man'
         );
-    // $data['hooks'] = $app['PrestashopModuleGenerator']::getHooksListData();
+
 
     $form_builder = $app['form.factory']->createBuilder('form', $data)
     ->add('name','text', array(
