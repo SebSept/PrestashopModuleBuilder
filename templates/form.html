@@ -1,6 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>formulaire</h1>
-	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<h1>Create your Prestashop module skeleton</h1>
+
+{#	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
+
+{{ form_start(form) }}
+<fieldset>
+	<legend>Main definition</legend>
+	{{ form_row(form.name) }}
+	{{ form_row(form.displayName) }}
+	{{ form_row(form.description) }}
+	{{ form_row(form.author) }}
+	{{ form_row(form.version) }}
+
+	{{ form_errors(form.need_instance) }}
+	{{ form_widget(form.need_instance) }}
+	{{ form_label(form.need_instance) }}
+</fieldset>
+
+<fieldset>
+	<legend>Hooks</legend>
+	{% for element in form.form %}
+	<div >
+		{{ form_errors(element) }}
+		{{ form_widget(element) }}
+		{{ form_label(element) }}
+	{% endfor %}
+	</div>
+</fieldset>
+
+{{ form_end(form) }}
+
 {% endblock %}
