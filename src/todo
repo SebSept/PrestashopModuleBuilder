@@ -1,5 +1,6 @@
 add hook description in hook function comment
-add registerHook in install()
-+ _install_db
 + _uninstall_db
 + config values
++ order tabs by name
++ group hooks by display/action an alphabetical order
++ _postProcess function

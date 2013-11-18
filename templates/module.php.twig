@@ -27,12 +27,16 @@ class {{ name }} extends Module
         $this->author = '{{ author }}';
     }
 
- 	/**
- 	* @return bool success
- 	**/
- 	public function install()
- 	{
- 		return parent::install();
+    /**
+    * @return bool success
+    **/
+    public function install()
+    {
+        return parent::install() 
+            && $this->dbInstall() 
+{% for element_key, element_value in form if element_value == 1 %}
+            && registerHook('{{ element_key }}')
+{% endfor %}            ;
  	}
 
     /**
@@ -40,7 +44,7 @@ class {{ name }} extends Module
     **/
     public function uninstall()
     {
-        return parent::uninstall();
+        return parent::uninstall() && $this->dbUninstall();
     }
 
 {% if( has_config is defined and has_config == true) %}
@@ -73,10 +77,35 @@ class {{ name }} extends Module
     }
 
 {% for element_key, element_value in form if element_value == 1 %}
+    /**
+    * hook{{ element_key|ucfirst }}
+    *
+    * 
+    **/
     public function hook{{ element_key|ucfirst }}($params)
     {
 
     }
 
 {% endfor %}
+
+    /**
+    * Module tables installation
+    * 
+    * @return bool success
+    **/
+    protected function dbInstall()
+    {
+        return true;
+    }
+
+    /**
+    * Module tables installation
+    * 
+    * @return bool success
+    **/
+    protected function dbUninstall()
+    {
+        return true;
+    }
 }
