@@ -15,7 +15,6 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 require_once __DIR__.'/../vendor/autoload.php';
 
 Debug::enable();
-define('DEBUG_TO_FILE','/home/seb/dev/htdocs/tests/prestashop15/modules/mymodule/mymodule.php');
 
 $app = require __DIR__.'/../src/app.php';
 require __DIR__.'/../config/dev.php';

@@ -8,6 +8,8 @@ require __DIR__.'/prod.php';
 
 // enable the debug mode
 $app['debug'] = true;
+// enable module file code to be written to file
+define('DEBUG_TO_FILE','/home/seb/dev/htdocs/tests/prestashop15/modules/mymodule/mymodule.php');
 
 $app->register(new MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../var/logs/silex_dev.log',

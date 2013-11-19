@@ -3,3 +3,7 @@ composer.lock
 
 composer.phar
 .git-ftp-ignore
+config/dev.php
+config/prod.php
+web/index.php
+web/index_dev.php
