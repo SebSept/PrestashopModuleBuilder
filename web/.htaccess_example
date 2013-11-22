@@ -1,9 +1,12 @@
 <IfModule mod_rewrite.c>
-    Options -MultiViews
+    #Options -MultiViews
 
     RewriteEngine On
-    RewriteBase /tests/prestamod/web/
+    # change to your base document folder 
+    # (for example if access to app using "http://yourhost.net/module-builder/" then next line must be "RewriteBase /module-builder/")
+    RewriteBase /module-builder/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index_dev.php [QSA,L]
 </IfModule>
-php_flag display_errors on
+# if blank screen, uncomment the following line may help ...
+# php_flag display_errors on
