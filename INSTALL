@@ -1,0 +1,16 @@
+INSTALL
+
+Requirements
+At least php 5.3.0 (maybe higher ?)
+
+web/ folder must be server document root (access available from http://yourhost/)
+other folder should be out of server web root.
+
+* Download source files
+* install composer @todo
+* run php composer.phar install
+* copy web/index.example.php to web/index.php
+* ( and if in developpment mode : copy web/index_dev.example.php to web/index_dev.php )
+* change $_app_dir in web/index.php (and web/index_dev.php) if you moved app directories
+* copy web/.htaccess.example to web/.htaccess
+* read and change values in web/.htaccess
