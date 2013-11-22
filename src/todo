@@ -1,4 +1,5 @@
 add hook description in hook function comment
++ prestashopModuleGenerator.php options in a yaml file for better maintenance
 + config values (example at least)
 + order tabs by name
 + group hooks by display/action an alphabetical order
@@ -8,10 +9,10 @@ add hook description in hook function comment
 	+ warning (string)
 	+ limited_countries = array();
 + use display() in display hooks
-+ overide functions()
 
 + collect stats on used hooks
 
 + generate a zip with dir, file and logo.png
++ overide classes and controllers
 + generate templates
 + generate translation files ?
