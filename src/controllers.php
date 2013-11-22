@@ -10,6 +10,7 @@ use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Validator\Constraints as Assert;
+
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->register(new FormServiceProvider());
@@ -58,9 +59,9 @@ $app->match('/form', function(Request $request) use($app)
     // hooks
     $hooks_builder = $app['form.factory']->createBuilder('form', null, array('label' => 'Hooks' /*, 'block_name' => 'myname1'*/ ));
 
-    foreach($app['PrestashopModuleGenerator']::getHooksListData() AS $hook)
+    foreach($app['PrestashopModuleGenerator']::getHooks() AS $hook)
     {
-        $hooks_builder->add($hook, 'checkbox', array('label' => $hook,'required' => false )) ;
+        $hooks_builder->add($hook['name'], 'checkbox', array('label' => $hook['name'],'required' => false )) ;
     }
     // insert hooks into main form builder
     $form_builder->add($hooks_builder);

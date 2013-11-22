@@ -22,6 +22,7 @@
         "symfony/twig-bridge": "~2.3",
         "symfony/validator": "~2.3",
 	    "symfony/locale": "~2.3",
+        "symfony/yaml": "~2.3",
         "kukulich/fshl": "~2.1"
     },
     "autoload": {
