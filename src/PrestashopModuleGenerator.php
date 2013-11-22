@@ -33,9 +33,10 @@ class PrestashopModuleGenerator
 	**/
 	protected static $config = array();
 
-	protected static $tabs = array('administration', 'advertising_marketing', 'analytics_stats', 'billing_invoicing', 'checkout',
-		'front_office_features', 'migration_tools', 'payments_gateways', 'payment_security', 'pricing_promotion', 'search_filter',
-		'seo', 'shipping_logistics', 'smart_shopping', 'market_place', 'mobile', 'custom');
+	/**
+	* @var $tabs array Prestashop admin tabs [ [id],... ]
+	**/
+	protected static $tabs = array();
 
 	public function __construct($app)
 	{
@@ -71,13 +72,18 @@ class PrestashopModuleGenerator
 	}
 
 	/**
-	* Module tabs list
+	* Prestashop Hooks
 	*
-	* @return array [<tab_id>, ... ]
+	* @return Array Prestashop hooks [ ([name],[title],[description]), () ...]
 	*/
 	public static function getTabs()
 	{
-		return array_combine (self::$tabs, self::$tabs);
+	 	if(empty(self::$tabs))
+	 	{
+	 		$cfg = self::getConfig();
+	 		self::$tabs = $cfg['tabs'];
+	 	}
+	 	return self::$tabs;
 	}
 
 	protected static function getConfig()
