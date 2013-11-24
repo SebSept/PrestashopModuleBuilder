@@ -1,10 +1,27 @@
+; deployed files
 /web/.htaccess
-/vendor/
-composer.lock
-
-composer.phar
-.git-ftp-ignore
+/web/.user.ini
 config/dev.php
 config/prod.php
 web/index.php
 web/index_dev.php
+
+; composer/app files
+/vendor/
+composer.lock
+composer.phar
+
+; git-ftp
+.git-ftp-ignore
+
+; deployed files
+/web/.htaccess
+/web/.user.ini
+config/dev.php
+config/prod.php
+web/index.php
+web/index_dev.php
+
+; ide files
+*.swo
+*.swp
