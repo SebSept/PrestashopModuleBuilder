@@ -1354,3 +1354,10 @@ this the same font stack that Normalize.css sets for the `body`.
         border-bottom: 1px solid black;
     }
 }
+
+/* main style */
+
+div.container {
+    max-width: 1280px;
+    margin:0 auto;
+}

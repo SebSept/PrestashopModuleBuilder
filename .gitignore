@@ -25,3 +25,4 @@ web/index_dev.php
 ; ide files
 *.swo
 *.swp
+/nbproject/
