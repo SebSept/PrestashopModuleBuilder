@@ -1,11 +1,26 @@
 {% extends "layout.html" %}
 
+{# --- customize form | http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-theming-methods #}
+
+    {% form_theme form _self %}
+
+    {% block text_row %}
+        <div class="pure-control-group">
+            {% set type = type|default('text') %}
+            {% set label = label|humanize %}
+            {{ block('form_label') }}
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endblock %}
+
+{# --- page content --- #}
+
 {% block content %}
 <h1>Create your Prestashop module skeleton</h1>
 
 {#	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class' : 'pure-form pure-form-aligned' } }) }}
 <fieldset>
 	<legend>Main definition</legend>
 	{{ form_row(form.name) }}
