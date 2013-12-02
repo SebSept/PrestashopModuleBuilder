@@ -21,7 +21,7 @@ class PrestashopModuleGenerator
 	/**
 	* @var $configFile string Path to yaml config file
 	**/
-	protected static $configFile = '../config/PrestashopModuleGeneratorConfig.yml';
+	protected static $configFile = '/../config/PrestashopModuleGeneratorConfig.yml';
 
 	/**
 	* @var $hooks array Prestashop hooks [ ([name],[title],[description]), () ...]
@@ -90,7 +90,7 @@ class PrestashopModuleGenerator
 	{
 		if(empty(self::$config))
 		{
-			self::$config = (new Parser())->parse(file_get_contents(self::$configFile));
+			self::$config = (new Parser())->parse(file_get_contents(__DIR__.self::$configFile));
 		}
 		return self::$config;
 	}
