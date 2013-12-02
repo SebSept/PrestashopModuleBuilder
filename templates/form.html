@@ -1,18 +1,5 @@
 {% extends "layout.html" %}
 
-{# --- customize form | http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-theming-methods #}
-
-    {% form_theme form _self %}
-
-    {% block text_row %}
-        <div class="pure-control-group">
-            {% set type = type|default('text') %}
-            {% set label = label|humanize %}
-            {{ block('form_label') }}
-            {{ block('form_widget_simple') }}
-        </div>
-    {% endblock %}
-
 {# --- page content --- #}
 
 {% block content %}
@@ -30,26 +17,60 @@
 	{{ form_row(form.version) }}
 	{{ form_row(form.tab) }}
 
-	{{ form_errors(form.need_instance) }}
-	{{ form_widget(form.need_instance) }}
-	{{ form_label(form.need_instance) }}
-
-	{{ form_errors(form.has_config) }}
-	{{ form_widget(form.has_config) }}
-	{{ form_label(form.has_config) }}
+        {{ form_row(form.need_instance) }}
+        {{ form_row(form.has_config) }}
 </fieldset>
 
-<fieldset>
+<fieldset id="hooks">
 	<legend>Hooks</legend>
 	{% for element in form.form %}
-	<div >
-		{{ form_errors(element) }}
-		{{ form_widget(element) }}
-		{{ form_label(element) }}
+            {{ form_row(element) }}
 	{% endfor %}
-	</div>
 </fieldset>
+
+        {{ form_row(form.generate, {attr: {class : 'pure-button pure-button-primary'} }) }}
 
 {{ form_end(form) }}
 
 {% endblock %}
+
+{# --- customize form | http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-theming-methods #}
+
+    {% form_theme form _self %}
+
+    {% block text_row %}
+        <div class="pure-control-group">
+            {% set type = type|default('text') %}
+            {% if label is sameas(false) %}
+                {% set label = label|humanize %}
+            {% endif %}
+            {% if attr.placeholder is not defined or attr.placeholder is empty %}
+                {% set attr = attr|merge({'placeholder': name|humanize }) %}
+            {% endif %}
+            {{ block('form_label') }}
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endblock %}
+
+    {% block choice_row %}
+        <div class="pure-control-group">
+            {% set type = type|default('choice') %}
+            {% if label is empty %}
+                {% set label = label|humanize %}
+            {% endif %}
+            {{ block('form_label') }}
+            {{ block('choice_widget') }}
+        </div>
+    {% endblock %}
+    
+    {% block checkbox_row %}
+        <div class="pure-controls">
+            {% set type = type|default('checkbox') %}
+            {% if label is empty %}
+                {% set label = label|humanize %}
+            {% endif %}
+            {{ block('checkbox_widget') }}
+            {{ block('form_label') }}
+        </div>
+    {% endblock %}
+  

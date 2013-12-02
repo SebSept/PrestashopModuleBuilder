@@ -28,21 +28,23 @@ $app->get('/', function () use ($app) {
 
 $app->match('/form', function(Request $request) use($app) 
 {
-    // some default data for when the form is displayed the first time
-    $data = array(
-        'need_instance' => false,
-        'version' => '0.1',
-        // dev values
-        'name' => 'MyModule',
-        'displayName' => 'My module to foo',
-        'description' => 'adds a bar on each fu',
-        'author' => 'Module man'
-        );
-
+    // some default data for when the form is displayed the first time in debug mode
+    if($app['debug'])
+    {
+        $data = array(
+            'need_instance' => false,
+            'version' => '0.1',
+            'name' => 'MyModule',
+            'displayName' => 'My module to foo',
+            'description' => 'adds a bar on each fu',
+            'author' => 'Module man'
+            );
+    }
 
     $form_builder = $app['form.factory']->createBuilder('form', $data)
     ->add('name','text', array(
         'label' => 'Module Class name',
+        'attr' => array ('placeholder' => 'MyModuleClassName'),
         'constraints' => array(
          new Assert\NotBlank(),
          // @todo assert is a regular class name
@@ -54,7 +56,7 @@ $app->match('/form', function(Request $request) use($app)
     ->add('author')
     ->add('tab', 'choice', array('choices' => $app['PrestashopModuleGenerator']::getTabs() ))
     ->add('need_instance', 'checkbox', array('required' => false))
-    ->add('version');
+    ->add('version' , 'text', array ('attr' => array('placeholder' => '0.1') ) );
 
     // hooks
     $hooks_builder = $app['form.factory']->createBuilder('form', null, array('label' => 'Hooks' /*, 'block_name' => 'myname1'*/ ));
@@ -72,7 +74,7 @@ $app->match('/form', function(Request $request) use($app)
                 'required' => false,
             ));
     // save button
-    $form_builder->add('save', 'submit');
+    $form_builder->add('generate', 'submit', array('label' => 'Generate' /*,'attr' => array('class' => 'pure-button')*/ ));
 
     $form = $form_builder->getForm();
     $form->handleRequest($request);

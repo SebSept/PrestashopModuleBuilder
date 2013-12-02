@@ -916,9 +916,6 @@ a.pure-button-selected {
     width: 25%;
 }
 
-/* Inline help for forms */
-/* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
-.pure-form .pure-help-inline,
 .pure-form-message-inline {
     display: inline-block;
     padding-left: 0.3em;
@@ -1361,3 +1358,16 @@ div.container {
     max-width: 1280px;
     margin:0 auto;
 }
+
+.pure-form-aligned #hooks div.pure-controls {
+    float: left;
+    margin: 0.5em 0px 0px 5em;
+    width: 30%;
+}
+
+form {
+    margin-bottom:4em
+}
+input[type=text] {width:15em;}
+
+button#form_generate {float:right;}
