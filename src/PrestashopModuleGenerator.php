@@ -74,14 +74,14 @@ class PrestashopModuleGenerator
 	/**
 	* Prestashop Hooks
 	*
-	* @return Array Prestashop hooks [ ([name],[title],[description]), () ...]
+	* @return Array Prestashop module admin tabs [ [name] => [name], ...]
 	*/
 	public static function getTabs()
 	{
 	 	if(empty(self::$tabs))
 	 	{
 	 		$cfg = self::getConfig();
-	 		self::$tabs = $cfg['tabs'];
+	 		self::$tabs = array_combine( $cfg['tabs'], $cfg['tabs']) ;
 	 	}
 	 	return self::$tabs;
 	}

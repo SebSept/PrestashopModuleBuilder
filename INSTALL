@@ -7,8 +7,9 @@ web/ folder must be server document root (access available from http://yourhost/
 other folder should be out of server web root.
 
 * Download source files
-* install composer @todo
-* run php composer.phar install
+* install base app (silex) and dependencies using composer : in your favorite terminal :
+ * curl -sS https://getcomposer.org/installer | php
+ * php composer.phar install
 * copy web/index.example.php to web/index.php
 * ( and if in developpment mode : copy web/index_dev.example.php to web/index_dev.php )
 * change $_app_dir in web/index.php (and web/index_dev.php) if you moved app directories
