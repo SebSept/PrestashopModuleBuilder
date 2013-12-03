@@ -33,10 +33,13 @@ class {{ name }} extends Module
     public function install()
     {
         return parent::install() 
-            && $this->dbInstall() 
+            {% spaceless %}
+            {% if( install_uninstall_db is defined and install_uninstall_db == true) %}
+            && $this->dbInstall()
+            {% endif %}{% endspaceless %}
 {% for element_key, element_value in form if element_value == 1 %}
             && $this->registerHook('{{ element_key }}')
-{% endfor %}            ;
+{% endfor %};
  	}
 
     /**
@@ -44,9 +47,14 @@ class {{ name }} extends Module
     **/
     public function uninstall()
     {
-        return parent::uninstall() && $this->dbUninstall();
+        return parent::uninstall() 
+            {% spaceless %}
+            {% if( install_uninstall_db is defined and install_uninstall_db == true) %}
+                && $this->dbUninstall()
+            {% endif %}; 
+            {% endspaceless %}
+            
     }
-
 {% if( has_config is defined and has_config == true) %}
     /**
     * Module admin page
@@ -56,8 +64,10 @@ class {{ name }} extends Module
         return '<p>Here is the module configuration.</p>';
     }
 {% endif %}
+
+{% if( enable_disable is defined and enable_disable == true) %}
     /**
-    * Activate current module.
+    * Enable/Activate module.
     *
     * @param bool $forceAll If true, enable module for all shop
     */
@@ -67,7 +77,7 @@ class {{ name }} extends Module
     }
 
     /**
-    * Desactivate current module.
+    * Disable/Deactivate module.
     *
     * @param bool $forceAll If true, disable module for all shop
     */
@@ -75,7 +85,8 @@ class {{ name }} extends Module
     {
         return parent::disable($forceAll);
     }
-
+{% endif %}
+    
 {% for element_key, element_value in form if element_value == 1 %}
     /**
     * hook{{ element_key|ucfirst }}
@@ -88,7 +99,7 @@ class {{ name }} extends Module
     }
 
 {% endfor %}
-
+{% if( install_uninstall_db is defined and install_uninstall_db == true) %}
     /**
     * Module tables installation
     * 
@@ -108,4 +119,6 @@ class {{ name }} extends Module
     {
         return true;
     }
+{% endif %}
+    
 }
