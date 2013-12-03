@@ -73,10 +73,17 @@ $app->match('/form', function(Request $request) use($app)
 
     // has a configuration form in admin ?
     $form_builder->add('has_config', 'checkbox', 
-        array(  'label' => 'Has an admin page ? (to change module parameters or content)',
+        array(  'label' => 'Admin page',
                 'required' => false,
             ));
-    // save button
+    
+    // enable / disable functions ?
+    $form_builder->add('enable_disable', 'checkbox', 
+        array(  'label' => 'enable / disable functions',
+                'required' => false,
+            ));
+    
+    // generate button
     $form_builder->add('generate', 'submit', array('label' => 'Generate' /*,'attr' => array('class' => 'pure-button')*/ ));
 
     $form = $form_builder->getForm();

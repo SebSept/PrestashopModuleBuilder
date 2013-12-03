@@ -56,8 +56,10 @@ class {{ name }} extends Module
         return '<p>Here is the module configuration.</p>';
     }
 {% endif %}
+
+{% if( enable_disable is defined and enable_disable == true) %}
     /**
-    * Activate current module.
+    * Enable/Activate module.
     *
     * @param bool $forceAll If true, enable module for all shop
     */
@@ -67,7 +69,7 @@ class {{ name }} extends Module
     }
 
     /**
-    * Desactivate current module.
+    * Disable/Deactivate module.
     *
     * @param bool $forceAll If true, disable module for all shop
     */
@@ -75,7 +77,8 @@ class {{ name }} extends Module
     {
         return parent::disable($forceAll);
     }
-
+{% endif %}
+    
 {% for element_key, element_value in form if element_value == 1 %}
     /**
     * hook{{ element_key|ucfirst }}
