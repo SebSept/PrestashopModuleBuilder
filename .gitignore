@@ -14,15 +14,12 @@ composer.phar
 ; git-ftp
 .git-ftp-ignore
 
-; deployed files
-/web/.htaccess
-/web/.user.ini
-config/dev.php
-config/prod.php
-web/index.php
-web/index_dev.php
-
 ; ide files
 *.swo
 *.swp
 /nbproject/
+
+; customize template files
+/templates/head.html.twig
+/templates/header.html.twig
+/templates/footer.html.twig

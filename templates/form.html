@@ -3,35 +3,36 @@
 {# --- page content --- #}
 
 {% block content %}
-<h1>Create your Prestashop module skeleton</h1>
+<div class="pure-u-1">
+    <h1>Create your Prestashop module skeleton</h1>
 
-{#	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
+    {#	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
 
-{{ form_start(form, {'attr': {'class' : 'pure-form pure-form-aligned' } }) }}
-<fieldset>
-	<legend>Main definition</legend>
-	{{ form_row(form.name) }}
-	{{ form_row(form.displayName) }}
-	{{ form_row(form.description) }}
-	{{ form_row(form.author) }}
-	{{ form_row(form.version) }}
-	{{ form_row(form.tab) }}
+    {{ form_start(form, {'attr': {'class' : 'pure-form pure-form-aligned' } }) }}
+    <fieldset>
+            <legend>Main definition</legend>
+            {{ form_row(form.name) }}
+            {{ form_row(form.displayName) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.author) }}
+            {{ form_row(form.version) }}
+            {{ form_row(form.tab) }}
 
-        {{ form_row(form.need_instance) }}
-        {{ form_row(form.has_config) }}
-</fieldset>
+            {{ form_row(form.need_instance) }}
+            {{ form_row(form.has_config) }}
+    </fieldset>
 
-<fieldset id="hooks">
-	<legend>Hooks</legend>
-	{% for element in form.form %}
-            {{ form_row(element) }}
-	{% endfor %}
-</fieldset>
+    <fieldset id="hooks">
+            <legend>Hooks</legend>
+            {% for element in form.form %}
+                {{ form_row(element) }}
+            {% endfor %}
+    </fieldset>
 
-        {{ form_row(form.generate, {attr: {class : 'pure-button pure-button-primary'} }) }}
+            {{ form_row(form.generate, {attr: {class : 'pure-button pure-button-primary'} }) }}
 
-{{ form_end(form) }}
-
+    {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {# --- customize form | http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-theming-methods #}
