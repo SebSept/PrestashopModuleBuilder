@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Your Prestashop Module Code</h1>
-<pre>
+    <div class="pure-u-1">
+        <h1>Your Prestashop Module Code</h1>
+        
+        <pre>
 {{ module_class_code|raw }}
-</pre>
+        </pre>
+    </div>
 {% endblock %}
