@@ -33,10 +33,13 @@ class {{ name }} extends Module
     public function install()
     {
         return parent::install() 
-            && $this->dbInstall() 
+            {% spaceless %}
+            {% if( install_uninstall_db is defined and install_uninstall_db == true) %}
+            && $this->dbInstall()
+            {% endif %}{% endspaceless %}
 {% for element_key, element_value in form if element_value == 1 %}
             && $this->registerHook('{{ element_key }}')
-{% endfor %}            ;
+{% endfor %};
  	}
 
     /**
@@ -44,9 +47,14 @@ class {{ name }} extends Module
     **/
     public function uninstall()
     {
-        return parent::uninstall() && $this->dbUninstall();
+        return parent::uninstall() 
+            {% spaceless %}
+            {% if( install_uninstall_db is defined and install_uninstall_db == true) %}
+                && $this->dbUninstall()
+            {% endif %}; 
+            {% endspaceless %}
+            
     }
-
 {% if( has_config is defined and has_config == true) %}
     /**
     * Module admin page
@@ -91,7 +99,7 @@ class {{ name }} extends Module
     }
 
 {% endfor %}
-
+{% if( install_uninstall_db is defined and install_uninstall_db == true) %}
     /**
     * Module tables installation
     * 
@@ -111,4 +119,6 @@ class {{ name }} extends Module
     {
         return true;
     }
+{% endif %}
+    
 }

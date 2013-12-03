@@ -83,6 +83,12 @@ $app->match('/form', function(Request $request) use($app)
                 'required' => false,
             ));
     
+    // installDb / uninstallDb functions ?
+    $form_builder->add('install_uninstall_db', 'checkbox', 
+        array(  'label' => 'install / uninstall Db functions',
+                'required' => false,
+            ));
+    
     // generate button
     $form_builder->add('generate', 'submit', array('label' => 'Generate' /*,'attr' => array('class' => 'pure-button')*/ ));
 
