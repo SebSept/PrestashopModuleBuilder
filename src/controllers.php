@@ -105,6 +105,17 @@ $app->match('/form', function(Request $request) use($app)
     return $app['twig']->render('form.html', array('form' => $form->createView()));
 });
 
+// clear twig cache (needed in production when template changed)
+$app->get('/clear-cache/{clear_cache_key}', function ($clear_cache_key) use ($app) {
+   if(isset($app['twig.options']['clear_cache_key']) && $clear_cache_key === $app['twig.options']['clear_cache_key'])
+   {
+       $app['twig']->clearCacheFiles();
+       return new Response('cache cleared') ;
+   }
+   else
+        return new Response($app['twig']->render('errors/404.html'));
+});
+
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
         return;

@@ -15,3 +15,5 @@ other folder should be out of server web root.
 * change $_app_dir in web/index.php (and web/index_dev.php) if you moved app directories
 * copy web/.htaccess.example to web/.htaccess
 * read and change values in web/.htaccess
+* when ready for production : copy config/prod_example.php to config/prod.php
+* (add a key in config/prod.php to be able to clear cache, see notes in config/prod_example.php)
