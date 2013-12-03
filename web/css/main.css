@@ -1354,7 +1354,7 @@ this the same font stack that Normalize.css sets for the `body`.
 
 /* main style */
 
-div.container {
+*.container {
     max-width: 1280px;
     margin:0 auto;
 }
