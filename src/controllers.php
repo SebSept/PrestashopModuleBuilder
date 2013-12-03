@@ -41,6 +41,8 @@ $app->match('/form', function(Request $request) use($app)
             'author' => 'Module man'
             );
     }
+    else
+         $data = array();
 
     $form_builder = $app['form.factory']->createBuilder('form', $data)
     ->add('name','text', array(
