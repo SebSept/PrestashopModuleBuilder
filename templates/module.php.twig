@@ -58,10 +58,32 @@ class {{ name }} extends Module
 {% if( has_config is defined and has_config == true) %}
     /**
     * Module admin page
-    **/
+    */
     public function getContent()
     {
-        return '<p>Here is the module configuration.</p>';
+        $return = $this->_process_form();
+        $return .= $this->_display_admin();
+        return $return;
+    }
+    
+    /**
+    * Process admin form
+    *
+    * @return string html form process result (errors or success message)
+    */
+    protected function _process_form()
+    {
+        return '<p>Form processed.</p>';
+    }
+    
+    /**
+    * Admin form
+    *
+    * @return string html form content
+    */
+    protected function _display_admin()
+    {
+        return '<p>Form</p>';
     }
 {% endif %}
 
