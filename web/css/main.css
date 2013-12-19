@@ -1361,8 +1361,8 @@ this the same font stack that Normalize.css sets for the `body`.
 
 .pure-form-aligned #hooks div.pure-controls {
     float: left;
-    margin: 0.5em 0px 0px 5em;
-    width: 30%;
+    margin: 0.5em 0px 0px 0em;
+    width: 33%;
 }
 
 form {
