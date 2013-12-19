@@ -1,2 +1,35 @@
 /* site perso */
+body, footer.container  {
+    background: #dfd;
+}
+.container {
+    background: #fff;
+    padding:1em;
+}
+
+h1, .pure-form legend {
+    color:#585;
+}
+
+h1 {
+    text-align:center;
+}
+
+footer form 
+{
+    margin-bottom: 0em;
+}
+
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected { 
+background-color: #558855;
+color: #FFFFFF;
+}
+
+button#form_generate  {
+    font-size: 1.7em;
+    font-weight: 700;
+    margin-top: 1em;
+    width: 100%;
+}
+
 footer {text-align:center;}
