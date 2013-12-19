@@ -73,10 +73,23 @@ $app->match('/form', function(Request $request) use($app)
 
     // has a configuration form in admin ?
     $form_builder->add('has_config', 'checkbox', 
-        array(  'label' => 'Has an admin page ? (to change module parameters or content)',
+        array(  'label' => 'Admin page',
                 'required' => false,
             ));
-    // save button
+    
+    // enable / disable functions ?
+    $form_builder->add('enable_disable', 'checkbox', 
+        array(  'label' => 'enable / disable functions',
+                'required' => false,
+            ));
+    
+    // installDb / uninstallDb functions ?
+    $form_builder->add('install_uninstall_db', 'checkbox', 
+        array(  'label' => 'install / uninstall Db functions',
+                'required' => false,
+            ));
+    
+    // generate button
     $form_builder->add('generate', 'submit', array('label' => 'Generate' /*,'attr' => array('class' => 'pure-button')*/ ));
 
     $form = $form_builder->getForm();
@@ -103,6 +116,17 @@ $app->match('/form', function(Request $request) use($app)
 
     // display the form
     return $app['twig']->render('form.html', array('form' => $form->createView()));
+});
+
+// clear twig cache (needed in production when template changed)
+$app->get('/clear-cache/{clear_cache_key}', function ($clear_cache_key) use ($app) {
+   if(isset($app['twig.options']['clear_cache_key']) && $clear_cache_key === $app['twig.options']['clear_cache_key'])
+   {
+       $app['twig']->clearCacheFiles();
+       return new Response('cache cleared') ;
+   }
+   else
+        return new Response($app['twig']->render('errors/404.html'));
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {
