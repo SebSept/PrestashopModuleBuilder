@@ -7,6 +7,15 @@ body, footer.container  {
     padding:1em;
 }
 
+a,a:hover, a:visited,a:active {
+    text-decoration:none;
+    color:#353;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
 h1, .pure-form legend {
     color:#585;
 }
@@ -37,4 +46,11 @@ button#form_generate  {
     width: 100%;
 }
 
-footer {text-align:center;}
+footer {
+    opacity: 0.6;
+}
+footer:hover {
+    opacity: 0.9;
+}
+
+footer ul {list-style-type: none; padding-left:0; }
