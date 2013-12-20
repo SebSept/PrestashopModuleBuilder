@@ -53,4 +53,21 @@ footer:hover {
     opacity: 0.9;
 }
 
-footer ul {list-style-type: none; padding-left:0; }
+footer ul {
+    list-style-type: none; 
+    padding-left:0; 
+}
+
+footer div { 
+    text-align:center;
+}
+
+footer div:nth-child(1)
+{
+    text-align:left;
+}
+
+footer div:nth-child(3)
+{
+    text-align:right;
+}
