@@ -70,7 +70,13 @@ $app->match('/form', function(Request $request) use($app)
 
     foreach($app['PrestashopModuleGenerator']::getHooks() AS $hook)
     {
-        $hooks_builder->add($hook['name'], 'checkbox', array('label' => $hook['name'],'required' => false )) ;
+        $hooks_builder->add($hook['name'], 
+            'checkbox', 
+            array(  'label' => $hook['name'],
+                    'required' => false,
+                    'attr' => array ('data-description' => $hook['description'])
+                     )
+            ) ;
     }
     // insert hooks into main form builder
     $form_builder->add($hooks_builder);
