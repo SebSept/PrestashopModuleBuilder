@@ -21,8 +21,8 @@ $app['PrestashopModuleGenerator'] = function($app) { return new PrestashopModule
 $app['highlighter'] = function() { return new FSHL\Highlighter(new \FSHL\Output\Html());} ;
 
 $app->get('/', function () use ($app) {
-    return $app->redirect( './form' );
-//    return $app['twig']->render('index.html', array());
+//    return $app->redirect( './form' );
+    return $app['twig']->render('index.html', array());
 })
 ->bind('homepage')
 ;

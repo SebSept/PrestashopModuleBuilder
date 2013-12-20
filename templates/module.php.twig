@@ -20,7 +20,7 @@ class {{ name }} extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('{{ displayName }}');
+        $this->displayName = $this->l('{{ displayName|raw }}');
         $this->description = $this->l('{{ description }}');
 
         $this->version = '{{ version }}';
@@ -58,10 +58,94 @@ class {{ name }} extends Module
 {% if( has_config is defined and has_config == true) %}
     /**
     * Module admin page
-    **/
+    */
     public function getContent()
     {
-        return '<p>Here is the module configuration.</p>';
+        $return = $this->_process_form();
+        $return .= $this->_display_admin();
+        return $return;
+    }
+    
+    /**
+    * Process admin form
+    *
+    * @return string html form process result (errors or success message)
+    */
+    protected function _process_form()
+    {
+        return '<p>Form processed.</p>';
+    }
+    
+    /**
+    * Admin form
+    *
+    * @return string html form content
+    */
+    protected function _display_admin()
+    {
+        // Get default Language
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+         
+        // Init Fields form array
+        $fields_form[0]['form'] = array(
+            'legend' => array(
+                'title' => $this->l('Settings'),
+            ),
+            'input' => array(
+                // Add form inputs here
+                // define default value below
+                // example field :
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Configuration var label (input-name)'),
+                    'name' => 'input-name',
+                    'size' => 20,
+                    'required' => true
+                ),
+                // another
+                // array(
+                // ),
+            ),
+            'submit' => array(
+                'title' => $this->l('Save'),
+                'class' => 'button'
+            )
+        );
+         
+        $form = new HelperForm();
+         
+        // Module, token and currentIndex
+        $form->module = $this;
+        $form->name_controller = $this->name;
+        $form->token = Tools::getAdminTokenLite('AdminModules');
+        $form->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+         
+        // Language
+        $form->default_form_language = $default_lang;
+        $form->allow_employee_form_lang = $default_lang;
+         
+        // Title and toolbar
+        $form->title = $this->displayName;
+        $form->show_toolbar = true;        // false -> remove toolbar
+        $form->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
+        $form->submit_action = 'submit'.$this->name;
+        $form->toolbar_btn = array(
+            'save' =>
+            array(
+                'desc' => $this->l('Save'),
+                'href' => AdminController::$currentIndex.'&configure='.$this->name.'&save'.$this->name.
+                '&token='.Tools::getAdminTokenLite('AdminModules'),
+            ),
+            'back' => array(
+                'href' => AdminController::$currentIndex.'&token='.Tools::getAdminTokenLite('AdminModules'),
+                'desc' => $this->l('Back to list')
+            )
+        );
+         
+        // Load current value
+        $form->fields_value['input-name'] = Configuration::get(strtoupper($this->name).'_MYVAR');
+         
+        return $form->generateForm($fields_form);
     }
 {% endif %}
 
