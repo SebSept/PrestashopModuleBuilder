@@ -1378,3 +1378,8 @@ a#forkme {
     right: 0; 
     border: 0;
 }
+
+span.help span {display:none;}
+span.help img:hover~span {
+    display: block;
+}

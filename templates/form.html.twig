@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html.twig" %}
 
 {# --- page content --- #}
 
@@ -67,11 +67,18 @@
     {% block checkbox_row %}
         <div class="pure-controls">
             {% set type = type|default('checkbox') %}
+            {% set description = attr['data-description']|default('') %}
             {% if label is empty %}
                 {% set label = label|humanize %}
             {% endif %}
             {{ block('checkbox_widget') }}
             {{ block('form_label') }}
+            {% if description %}
+                <span class="help">
+                    <img src="{{app.request.basepath}}/img/help.png" />
+                    <span>{{ description }}</span>
+                </span>
+            {% endif %}
         </div>
     {% endblock %}
   

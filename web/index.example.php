@@ -1,9 +1,13 @@
 <?php
 /**
+* Prestashop Module builder
+*
 * application directories are better located out of servers web root
 *
 * @var $_app_dir path to application directory root (all directories except web/)
+* @author sebastien monterisi <sebastienmonterisi@yahoo.fr> 
 */
+
 $_app_dir = __DIR__.'/..';
 
 ini_set('display_errors', 0);
