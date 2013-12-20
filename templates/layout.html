@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html itemscope itemtype="http://schema.org/WebApplication">
+    
     <head>
         <title>Prestashop Module Builder</title>
+        <meta name="description" content="Prestashop module builder is an online open source tool to generate prestashop module code" />
+        <meta itemprop="name" content="Prestashop Module Builder">
+        <meta itemprop="description" content="Prestashop module builder :  generate prestashop module code skeleton (a free online open source tool)">
+        <meta itemprop="image" content="http://img-cdn.prestashop.com/logo.png">
+        
         <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css" />
+
         {# you can customize template by adding content to 'templates/head.html.twig' #}
         {% include 'head.html.twig' ignore missing %}
     </head>
+    
     <body>
         {% include 'header.html.twig' ignore missing %}
         <div class="container pure-g">
