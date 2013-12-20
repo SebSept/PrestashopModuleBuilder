@@ -1,4 +1,9 @@
 <?php
+/**
+* Prestashop Module builder
+*
+* @author sebastien monterisi <sebastienmonterisi@yahoo.fr>
+**/
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +26,7 @@ $app['PrestashopModuleGenerator'] = function($app) { return new PrestashopModule
 $app['highlighter'] = function() { return new FSHL\Highlighter(new \FSHL\Output\Html());} ;
 
 $app->get('/', function () use ($app) {
-//    return $app->redirect( './form' );
-    return $app['twig']->render('index.html', array());
+    return $app['twig']->render('index.html.twig', array());
 })
 ->bind('homepage')
 ;
@@ -98,9 +102,6 @@ $app->match('/form', function(Request $request) use($app)
     if ($form->isValid()) 
     {
         $data = $form->getData();
-        // var_dump($data);
-        
-        // methode via PrestashopModuleGenerator
         $module_class_code = $app['PrestashopModuleGenerator']->generate($data);
 
         // output result to a file, for debuging
@@ -109,13 +110,13 @@ $app->match('/form', function(Request $request) use($app)
 
         // highlight code and output
         $module_class_code = $app['highlighter']->setLexer(new \FSHL\Lexer\Php())->highlight($module_class_code);
-        $page = $app['twig']->render('module.html', array('module_class_code' => $module_class_code));
+        $page = $app['twig']->render('module.html.twig', array('module_class_code' => $module_class_code));
 
         return $page;
     }
 
     // display the form
-    return $app['twig']->render('form.html', array('form' => $form->createView()));
+    return $app['twig']->render('form.html.twig', array('form' => $form->createView()));
 });
 
 // clear twig cache (needed in production when template changed)
