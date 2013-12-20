@@ -16,7 +16,7 @@ a:hover {
     text-decoration:underline;
 }
 
-h1, .pure-form legend {
+h1 a, .pure-form legend {
     color:#585;
 }
 
