@@ -71,3 +71,25 @@ footer div:nth-child(3)
 {
     text-align:right;
 }
+
+/*span.help { position:relative; }*/
+
+span.help {
+    position: absolute; 
+}
+
+span.help img { position:relative;   z-index:2;}
+
+span.help span {
+    margin-left:-33%;
+    background: rgba(200, 250, 200, 0.898);
+    border: 1px solid #000000;
+    padding: 1em;
+    z-index:3;
+    position: relative;
+    display: none;  
+}
+span.help img:hover~span {
+    display: block;
+}
+

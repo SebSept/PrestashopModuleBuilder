@@ -1379,7 +1379,20 @@ a#forkme {
     border: 0;
 }
 
-span.help span {display:none;}
+/* help marks on hooks list */
+span.help img { 
+    position:relative;   
+    z-index:2;}
+
+span.help span {
+    margin-left:-33%;
+    background: #fff;
+    border: 2px solid #000000;
+    padding: 1em;
+    z-index:3;
+    position: relative;
+    display: none;  
+}
 span.help img:hover~span {
     display: block;
 }
