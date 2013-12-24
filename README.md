@@ -20,3 +20,5 @@ I wanted to a give a try to [silex php framework](http://silex.sensiolabs.org/) 
 ### Improvements
 
 There is lot to do, I have ideas, maybe you have...
+
+Caution : it will stop using silex and use slim, very soon.
