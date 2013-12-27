@@ -1,84 +1,72 @@
 {% extends "layout.html.twig" %}
+{% import _self as form %}
 
 {# --- page content --- #}
 
 {% block content %}
-<div class="pure-u-1">
-    {#	{{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
+<div class="pure-u-1" data-ng-app>
 
-    {{ form_start(form, {'attr': {'class' : 'pure-form pure-form-aligned' } }) }}
-    <fieldset>
-            <legend>Main definition</legend>
-            {{ form_row(form.name) }}
-            {{ form_row(form.displayName) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.author) }}
-            {{ form_row(form.version) }}
-            {{ form_row(form.tab) }}
+    <form method="post" action="form" class="pure-form pure-form-aligned" data-ng-controller="formCtrl">
+        <fieldset>
+                <legend>Main definition</legend>
+                {{ form.input('classname', classname , 'Module Class name') }} {#input(name, label, value, placeholder)#}
+                {{ form.input('displayname', displayname, 'Display name') }}
+                {{ form.input('description', description) }}
+                {{ form.input('author', author) }}
+                {{ form.input('version', version) }}
+                {{ form.select('tab', 'tab', tabs) }}
 
-            {{ form_row(form.need_instance) }}
-            {{ form_row(form.has_config) }}
-            {{ form_row(form.enable_disable) }}
-            {{ form_row(form.install_uninstall_db) }}
-    </fieldset>
+                {{ form.checkbox('need_instance', 'Need instance') }}
+                {{ form.checkbox('has_config', 'Admin page') }}
+                {{ form.checkbox('enable_disable', 'Enable/Disable functions') }}
+                {{ form.checkbox('install_uninstall_db', 'Install/Uninstall sql') }}
+        </fieldset>
 
-    <fieldset id="hooks">
-            <legend>Hooks</legend>
-            {% for element in form.form %}
-                {{ form_row(element) }}
-            {% endfor %}
-    </fieldset>
+        <fieldset id="hooks">
+                <legend>Hooks</legend>
+                {% for hook in hooks %}
+                    {{ form.checkbox('hooks[' ~  hook.name ~ ']', hook.name) }}
+                {% endfor %}
+        </fieldset>
+        
+        <input type="text" name="_token" ng-model="token" id="token" />
+{#        {{token}}#}
+        
+        <button type="submit" id="form_generate" name="generate" class="pure-button pure-button-primary">Generate</button>
 
-            {{ form_row(form.generate, {attr: {class : 'pure-button pure-button-primary'} }) }}
-
-    {{ form_end(form) }}
+    </form>
 </div>
 {% endblock %}
 
-{# --- customize form | http://symfony.com/doc/current/cookbook/form/form_customization.html#cookbook-form-theming-methods #}
+{# macro to display form inputs, only 'name' is mandatory 
+    @param name input name 
+    @param label
+    @param required (default = false)
+    @param value
+    @param placeholder
+#}
+{% macro input(name, value, label, required, placeholder) %}
+    {% set label = label|default(name)|capitalize %}
+    <div class="pure-control-group">
+        <label for="{{ name }}" {% if required is not sameas(false) %}class="required"{% endif %} >{{ label }}</label>
+        <input type="text" id="{{ name }}" name="{{ name }}" {% if required is not sameas(false) %}required="required"{% endif %} placeholder="{{ placeholder|default(label) }}" value="{{ value }}" />
+    </div>
+{% endmacro %}
 
-    {% form_theme form _self %}
+{% macro select(name, label, values) %}
+    <div class="pure-control-group">
+        <label for="{{ name }}" {#class="required"#}>{{label}}</label>
+        <select id="{{ name }}" name="{{ name }}">
+            {% for name, label in values %}
+                <option value="{{ name }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro %}
 
-    {% block text_row %}
-        <div class="pure-control-group">
-            {% set type = type|default('text') %}
-            {% if label is sameas(false) %}
-                {% set label = label|humanize %}
-            {% endif %}
-            {% if attr.placeholder is not defined or attr.placeholder is empty %}
-                {% set attr = attr|merge({'placeholder': name|humanize }) %}
-            {% endif %}
-            {{ block('form_label') }}
-            {{ block('form_widget_simple') }}
-        </div>
-    {% endblock %}
-
-    {% block choice_row %}
-        <div class="pure-control-group">
-            {% set type = type|default('choice') %}
-            {% if label is empty %}
-                {% set label = label|humanize %}
-            {% endif %}
-            {{ block('form_label') }}
-            {{ block('choice_widget') }}
-        </div>
-    {% endblock %}
-    
-    {% block checkbox_row %}
-        <div class="pure-controls">
-            {% set type = type|default('checkbox') %}
-            {% set description = attr['data-description']|default('') %}
-            {% if label is empty %}
-                {% set label = label|humanize %}
-            {% endif %}
-            {{ block('checkbox_widget') }}
-            {{ block('form_label') }}
-            {% if description %}
-                <span class="help">
-                    <img src="{{app.request.basepath}}/img/help.png" />
-                    <span>{{ description }}</span>
-                </span>
-            {% endif %}
-        </div>
-    {% endblock %}
-  
+{% macro checkbox(name, label) %}
+    <div class="pure-controls">
+        <input type="checkbox" id="{{ name }}" name="{{ name }}" />
+        <label for="{{ name }}">{{ label }}</label>
+    </div>
+{% endmacro %}

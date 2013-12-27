@@ -10,17 +10,17 @@
 if (!defined('_PS_VERSION_'))
 	exit;
 
-class {{ name }} extends Module
+class {{ classname }} extends Module
 {
     public function __construct()
     {
-        $this->name = '{{ name|lower }}';
+        $this->name = '{{ classname|lower }}';
         $this->tab = '{{ tab }}';
         $this->need_instance = {% if need_instance == false %}0{% else %}1{% endif %};
 
         parent::__construct();
 
-        $this->displayName = $this->l('{{ displayName|raw }}');
+        $this->displayname = $this->l('{{ displayname|raw }}');
         $this->description = $this->l('{{ description }}');
 
         $this->version = '{{ version }}';
@@ -125,7 +125,7 @@ class {{ name }} extends Module
         $form->allow_employee_form_lang = $default_lang;
          
         // Title and toolbar
-        $form->title = $this->displayName;
+        $form->title = $this->displayname;
         $form->show_toolbar = true;        // false -> remove toolbar
         $form->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
         $form->submit_action = 'submit'.$this->name;

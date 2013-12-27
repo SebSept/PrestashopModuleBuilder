@@ -22,8 +22,11 @@
         <meta itemprop="description" content="Prestashop module builder :  generate prestashop module code skeleton (a free online open source tool)">
         <meta itemprop="image" content="http://img-cdn.prestashop.com/logo.png">
         
-        <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css" />
-
+        <link href="{{ base_url }}css/main.css" rel="stylesheet" type="text/css" />
+        
+{#        <script src="{{ base_url }}js/angular.js"></script>#}
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+        <script type="text/javascript" src="{{ base_url }}js/myapp.js" ></script>
         {# you can customize template by adding content to 'templates/head.html.twig' #}
         {% include 'head.html.twig' ignore missing %}
     </head>
@@ -32,11 +35,11 @@
         {% include 'header.html.twig' ignore missing %}
         <div class="container pure-g">
             <div class="pure-u-1">
-                <h1><a href="{{ app.request.basepath }}">Prestashop Module Builder</a></h1>
+                <h1><a href="{{ base_url }}">Prestashop Module Builder</a></h1>
             </div>
             {% block content %}{% endblock %}
         </div>
-        {% include 'footer.html.twig' ignore missing %}
+{#        {% include 'footer.html.twig' ignore missing %}#}
         <a id="forkme" href="https://github.com/SebSept/PrestashopModuleBuilder">
             <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub">
         </a>

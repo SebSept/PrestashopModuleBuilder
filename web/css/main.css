@@ -1396,3 +1396,5 @@ span.help span {
 span.help img:hover~span {
     display: block;
 }
+
+input#token { display:none; }

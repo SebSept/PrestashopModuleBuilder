@@ -5,9 +5,10 @@
 * To create Prestashop Module files skeleton 
 * 
 * @author sebastienmonterisi@yahoo.fr
+* @todo uncouple from parser and template engine
 **/
 
-use Symfony\Component\Yaml\Parser;
+//use Symfony\Component\Yaml\Parser;
 
 class PrestashopModuleGenerator
 {
@@ -37,11 +38,11 @@ class PrestashopModuleGenerator
 	* @var $tabs array Prestashop admin tabs [ [id],... ]
 	**/
 	protected static $tabs = array();
-
-	public function __construct($app)
+        
+	public function __construct($twig)
 	{
 		$filter = new Twig_SimpleFilter('ucfirst', 'ucfirst');
-		$this->twig = $app['twig'];
+		$this->twig = $twig;
 		$this->twig->addFilter($filter);
 	}
 
@@ -49,13 +50,27 @@ class PrestashopModuleGenerator
 	*
 	* @return mixed bool|string False if failled, url to generated file if success
 	*/
-	public function generate($data)
+	public function getMainCode()
 	{
-		// $this->twig->loadTemplate('module.php.twig');
-		// $output = $this->twig->render('module.php.twig', $data);
-		return $this->twig->render('module.php.twig', $data);
+		return $this->twig->render('module.php.twig', $this->data);
 	}
 
+        /**
+         * Receive raw data
+         * 
+         * Since twig filter the datas, they are not filtered
+         * If later you use another template engine, you may need to sanitize input datas
+         * 
+         * @param type $data
+         * @return void
+         */
+        public function setData($data)
+        {
+            $this->data = $data;
+            var_dump($data);
+            // @todo  replace hooks with hooks from config (to get description data)
+        }
+        
 	/**
 	* Prestashop Hooks
 	*
@@ -86,11 +101,16 @@ class PrestashopModuleGenerator
 	 	return self::$tabs;
 	}
 
+        /**
+         * Configuration (hooks and tabs)
+         * 
+         * @return array config values from yaml config file
+         */
 	protected static function getConfig()
 	{
 		if(empty(self::$config))
 		{
-			self::$config = (new Parser())->parse(file_get_contents(__DIR__.self::$configFile));
+			self::$config = (new Symfony\Component\Yaml\Parser())->parse(file_get_contents(__DIR__.self::$configFile));
 		}
 		return self::$config;
 	}
