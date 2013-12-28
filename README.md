@@ -1,7 +1,7 @@
 PrestashopModuleBuilder
 =======================
 
-This branch is abandonned, use (beta-slim)[https://github.com/SebSept/PrestashopModuleBuilder/tree/beta-slim] instead.
+This branch is abandonned, use [beta-slim](https://github.com/SebSept/PrestashopModuleBuilder/tree/beta-slim) instead.
 
 PrestashopModuleBuilder is a tool to help you code [Prestashop](http://www.prestashop.com/) modules.
 
