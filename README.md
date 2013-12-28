@@ -19,6 +19,5 @@ It can help you save time in the first step writing a module.
 There is lot to do, I have ideas, maybe you have...
 
 
-This is the (Slim)[http://www.slimframework.com/] branch. The main dev branch now.
-(beta)[https://github.com/SebSept/PrestashopModuleBuilder/tree/beta] and alpha are 	
-abandoned.
+This is the [Slim](http://www.slimframework.com/) branch. The main dev branch now.
+beta and alpha branches are abandoned.
