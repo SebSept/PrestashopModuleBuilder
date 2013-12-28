@@ -67,8 +67,8 @@ $app->post('/form', function () use ($app) {
         $module_class_code = $app->psmodgen->getMainCode();
 
         // output result to a file, for debuging
-        if(defined('DEBUG_TO_FILE') && DEBUG_TO_FILE)
-            file_put_contents(DEBUG_TO_FILE, $module_class_code);
+        if($app->config('debugtofile') && $app->getMode() === 'development')
+            file_put_contents($app->config('debugtofile'), $module_class_code);
 
         // highlight code and output
         $module_class_code = $app->highlighter->highlight($module_class_code);
