@@ -97,8 +97,8 @@ class {{ classname }} extends Module
                 // example field :
                 array(
                     'type' => 'text',
-                    'label' => $this->l('Configuration var label (input-name)'),
-                    'name' => 'input-name',
+                    'label' => $this->l('Configuration var label (my-var)'),
+                    'name' => 'my-var',
                     'size' => 20,
                     'required' => true
                 ),
@@ -143,7 +143,7 @@ class {{ classname }} extends Module
         );
          
         // Load current value
-        $form->fields_value['input-name'] = Configuration::get(strtoupper($this->name).'_MYVAR');
+        $form->fields_value['my-var'] = Configuration::get(strtoupper($this->name).'_my-var');
          
         return $form->generateForm($fields_form);
     }
