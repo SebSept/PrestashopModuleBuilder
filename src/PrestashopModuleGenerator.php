@@ -67,7 +67,6 @@ class PrestashopModuleGenerator
         public function setData($data)
         {
             $this->data = $data;
-            var_dump($data);
             // @todo  replace hooks with hooks from config (to get description data)
         }
         

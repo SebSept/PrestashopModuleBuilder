@@ -1,20 +1,24 @@
 <?php
 /**
-* Prestashop Module builder
-*
-* application directories are better located out of servers web root
-*
-* @var $_app_dir path to application directory root (all directories except web/)
-* @author sebastien monterisi <sebastienmonterisi@yahoo.fr> 
-*/
+ * Production bootstrap file
+ * 
+ * @package Prestahop Module builder
+ * @author sebastien monterisi <sebastienmonterisi@yahoo.fr>
+ * @link https://github.com/SebSept/PrestashopModuleBuilder
+ */
 
-$_app_dir = __DIR__.'/..';
+/**
+ * application directories are better located out of servers web root
+ *
+ * @var APP_DIR path to application directory root (all directories except web/)
+ */
+define('APP_DIR', __DIR__ . '/..');
 
-ini_set('display_errors', 0);
+// composer autoloader
+$loader = require_once APP_DIR.'/vendor/autoload.php';
 
-require_once $_app_dir.'/vendor/autoload.php';
+// load config
+$config = require(APP_DIR.'/config/prod.php');
 
-$app = require $_app_dir.'/src/app.php';
-require $_app_dir.'/config/prod.php';
-require $_app_dir.'/src/controllers.php';
-$app->run();
+// run app
+require(APP_DIR.'/src/app.php');
