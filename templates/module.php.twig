@@ -73,7 +73,32 @@ class {{ classname }} extends Module
     */
     protected function _process_form()
     {
-        return '<p>Form processed.</p>';
+        $return = '';
+        if (Tools::isSubmit('submit'.$this->name))
+        {
+           $errors = array();
+           // filter submitted vars
+           $my_var = strval(Tools::getValue('my-var'));
+           
+           // check values 
+           if (!$my_var  || empty($my_var) || !Validate::isGenericName($my_var))
+           {
+               $errors[] = $this->displayError( $this->l('Invalid Configuration value') );
+           }
+           
+           // handle errors / success
+           if(empty($errors))
+           {
+               Configuration::updateValue(strtoupper($this->name).'my-var', $my_var);
+               
+               $return .= $this->displayConfirmation($this->l('Settings updated'));
+           }
+           else
+           {
+                $return .= implode($errors);
+           }
+        }
+        return $return;
     }
     
     /**
