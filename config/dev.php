@@ -11,7 +11,7 @@ return array(
     'slim' => array(
         'debug' => true,
         'log.level' => \Slim\Log::DEBUG,
-        'log.enabled' => true,
+//        'log.enabled' => true,
         'mode' => 'development',
 //        'debugtofile' => '/home/seb/dev/htdocs/tests/prestashop15/modules/mymodule/mymodule.php',
         'debugtofile' => false,
