@@ -37,8 +37,8 @@ class {{ classname }} extends Module
             {% if( install_uninstall_db is defined and install_uninstall_db == true) %}
             && $this->dbInstall()
             {% endif %}{% endspaceless %}
-{% for element_key, element_value in hooks  %}
-            && $this->registerHook('{{ element_key }}')
+{% for hook in hooks %}
+            && $this->registerHook('{{ hook.name }}')
 {% endfor %};
  	}
 
@@ -196,13 +196,15 @@ class {{ classname }} extends Module
     }
 {% endif %}
     
-{% for element_key, element_value in hooks %}
+{% for hook in hooks %}
     /**
-    * hook{{ element_key|ucfirst }}
+    * hook{{ hook.name|ucfirst }}
     *
-    * 
+    * {{ hook.title|raw }}
+    * {% if hook.description != hook.title%}{{ hook.description|raw }}
+{% endif %}
     **/
-    public function hook{{ element_key|ucfirst }}($params)
+    public function hook{{ hook.name|ucfirst }}($params)
     {
 
     }

@@ -67,20 +67,28 @@ class PrestashopModuleGenerator
         public function setData($data)
         {
             $this->data = $data;
-            // @todo  replace hooks with hooks from config (to get description data)
+            // replace 'hooks' from form with hooks from config (to get description data)
+            if(!empty($this->data['hooks']))
+            {
+                $_hooks = $this->getHooks();
+                foreach($this->data['hooks'] AS $hook => $on)
+                {
+                    $this->data['hooks'][$hook] = $_hooks[$hook];
+                }
+            }
         }
         
 	/**
 	* Prestashop Hooks
 	*
-	* @return Array Prestashop hooks [ ([name],[title],[description]), () ...]
+	* @return Array Prestashop hooks [ [name] => ([name],[title],[description]), () ...]
 	*/
 	public static function getHooks()
 	{
 	 	if(empty(self::$hooks))
 	 	{
 	 		$cfg = self::getConfig();
-	 		self::$hooks = $cfg['hooks'];
+	 		self::$hooks = array_combine( array_column($cfg['hooks'], 'name'), $cfg['hooks']);
 	 	}
 	 	return self::$hooks;
 	}
