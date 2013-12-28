@@ -4,6 +4,7 @@
         "symfony/yaml": "~2.3",
         "kukulich/fshl": "~2.1",
         "twig/twig": "v1.15.0",
-        "kunststube/csrfp": "dev-master"
+        "kunststube/csrfp": "dev-master",
+        "rhumsaa/array_column": "dev-master"
     }
 }
