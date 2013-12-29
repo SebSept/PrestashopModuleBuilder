@@ -12,6 +12,7 @@
  *
  * @var APP_DIR path to application directory root (all directories except web/)
  */
+error_reporting(0);
 define('APP_DIR', __DIR__ . '/..');
 
 // composer autoloader

@@ -78,7 +78,7 @@ class {{ classname }} extends Module
         {
            $errors = array();
            // filter submitted vars
-           $my_var = strval(Tools::getValue('my-var'));
+           $my_var = (string)(Tools::getValue('my-var'));
            
            // check values 
            if (!$my_var  || empty($my_var) || !Validate::isGenericName($my_var))
@@ -89,7 +89,7 @@ class {{ classname }} extends Module
            // handle errors / success
            if(empty($errors))
            {
-               Configuration::updateValue(strtoupper($this->name).'_my-var', $my_var);
+               Configuration::updateValue(Tools::strtoupper($this->name).'_my-var', $my_var);
                
                $return .= $this->displayConfirmation($this->l('Settings updated'));
            }
@@ -168,7 +168,7 @@ class {{ classname }} extends Module
         );
          
         // Load current value
-        $form->fields_value['my-var'] = Configuration::get(strtoupper($this->name).'_my-var');
+        $form->fields_value['my-var'] = Configuration::get(Tools::strtoupper($this->name).'_my-var');
          
         return $form->generateForm($fields_form);
     }
