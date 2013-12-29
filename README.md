@@ -20,7 +20,7 @@ There is lot to do, I have ideas, maybe you have...
 
 ### Changelog
 
-see [changelog](./CHANGELOG).
+see [changelog](./CHANGELOG.md).
 
 This is the [Slim](http://www.slimframework.com/) branch. The main dev branch now.
 beta and alpha branches are abandoned.
