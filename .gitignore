@@ -20,6 +20,6 @@ composer.phar
 /nbproject/
 
 ; customize template files
-;/templates/head.html.twig
-;/templates/header.html.twig
-;/templates/footer.html.twig
+/templates/head.html.twig
+/templates/header.html.twig
+/templates/footer.html.twig
