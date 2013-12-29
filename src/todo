@@ -1,9 +1,5 @@
-add hook description in hook function comment
-+ prestashopModuleGenerator.php options in a yaml file for better maintenance
 + config values (example at least)
-+ order tabs by name
 + group hooks by display/action an alphabetical order
-+ _postProcess function + basic admin form flow
 + try/catch in hooks (and rest ?)
 + include prestashop compat options
 	+ warning (string)
