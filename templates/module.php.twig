@@ -89,7 +89,7 @@ class {{ classname }} extends Module
            // handle errors / success
            if(empty($errors))
            {
-               Configuration::updateValue(strtoupper($this->name).'my-var', $my_var);
+               Configuration::updateValue(strtoupper($this->name).'_my-var', $my_var);
                
                $return .= $this->displayConfirmation($this->l('Settings updated'));
            }
