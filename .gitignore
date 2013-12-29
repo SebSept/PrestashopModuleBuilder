@@ -20,4 +20,4 @@ composer.phar
 /nbproject/
 
 ; customize template files
-/templates/custom/
+;/templates/custom/
