@@ -7,7 +7,7 @@
  used in every app view
 
  If you wish to personnalize the app design and contents 
- you can create and add contents to /templates/head.html.twig , header.html.twig and footer.html.twig
+ you can create and add contents to /templates/custom/head.html.twig , header.html.twig and footer.html.twig
 
  @author sebastien monterisi <sebastienmonterisi@yahoo.fr>
 
@@ -28,18 +28,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
         <script type="text/javascript" src="{{ base_url }}js/myapp.js" ></script>
         {# you can customize template by adding content to 'templates/head.html.twig' #}
-        {% include 'head.html.twig' ignore missing %}
+        {% include 'custom/head.html.twig' ignore missing %}
     </head>
     
     <body>
-        {% include 'header.html.twig' ignore missing %}
+        {% include 'custom/header.html.twig' ignore missing %}
         <div class="container pure-g">
             <div class="pure-u-1">
                 <h1><a href="{{ base_url }}">Prestashop Module Builder</a></h1>
             </div>
             {% block content %}{% endblock %}
         </div>
-        {% include 'footer.html.twig' ignore missing %}
+        {% include 'custom/footer.html.twig' ignore missing %}
         <a id="forkme" href="https://github.com/SebSept/PrestashopModuleBuilder">
             <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub">
         </a>
