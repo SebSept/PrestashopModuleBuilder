@@ -25,7 +25,11 @@
         <fieldset id="hooks">
                 <legend>Hooks</legend>
                 {% for hook in hooks %}
-                    {{ form.checkbox('hooks[' ~  hook.name ~ ']', hook.name) }}
+                    {% set help = hook.title|raw %}
+                    {% if hook.description and hook.description != hook.title %}
+                        {% set help = help~' | '~hook.description|raw %}
+                    {% endif %}
+                    {{ form.checkbox('hooks[' ~  hook.name ~ ']', hook.name, help) }}
                 {% endfor %}
         </fieldset>
         
@@ -64,9 +68,15 @@
     </div>
 {% endmacro %}
 
-{% macro checkbox(name, label) %}
+{% macro checkbox(name, label, help_text) %}
     <div class="pure-controls">
         <input type="checkbox" id="{{ name }}" name="{{ name }}" />
         <label for="{{ name }}">{{ label }}</label>
+        {% if help_text %}
+                <span class="help">
+                    <img src="{{ base_url }}/img/help.png" />
+                    <span>{{ help_text }}</span>
+                </span>
+        {% endif %}
     </div>
 {% endmacro %}
