@@ -3,7 +3,7 @@
 /web/.user.ini
 config/dev.php
 config/prod.php
-web/index.php
+web/index_prod.php
 web/index_dev.php
 
 ; composer/app files

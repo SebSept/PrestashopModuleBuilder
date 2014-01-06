@@ -6,7 +6,9 @@
     # (for example if access to app using "http://yourhost.net/module-builder/" then next line must be "RewriteBase /module-builder/")
     RewriteBase /module-builder/
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index_dev.php [QSA,L] # take care that index.php does not exist in dev mode
+    # here you choose prod or dev mode
+    RewriteRule ^ index_dev.php [QSA,L]
+    #RewriteRule ^ index_prod.php [QSA,L]
 </IfModule>
 # if blank screen, uncomment the following line may help ...
 # php_flag display_errors on

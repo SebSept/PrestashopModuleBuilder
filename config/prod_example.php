@@ -18,9 +18,10 @@ return array(
     'twig' => array(
         'path' => array(__DIR__.'/../templates'),
         'options' => array(
-            'cache' => __DIR__.'/../var/cache/twig',
-            // this allow you to easyly clear twig cache, just opening http://yourpath/clear-cache/<key-defined-bellow>
-            'clear_cache_key' => 'f2fa0bd05dd7448155b0c5a72e2a222df9dd6f0'
-        )
+            'debug' => false,
+            'cache' => __DIR__.'/../var/cache/twig/',
+        ),
+        // this allow you to easyly clear twig cache, just opening http://yourpath/clear-cache/<key-defined-bellow>
+        'clear_cache_key' => ''
     )
 );

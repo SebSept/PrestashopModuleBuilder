@@ -7,7 +7,7 @@
  * @link https://github.com/SebSept/PrestashopModuleBuilder
  */
 
-
+// register PrestashopModuleGenerator in composer loader
 $loader->add('PrestashopModuleGenerator', __DIR__ . '/../src/');
 
 // create app
@@ -16,8 +16,8 @@ $app = new \Slim\Slim($config['slim']);
 // injections 
 // twig
 $TwigLoader = new Twig_Loader_Filesystem();
-$TwigLoader->setPaths(APP_DIR.'/templates/');
-$app->twig = new Twig_Environment($TwigLoader);
+$TwigLoader->setPaths( $config['twig']['path'] );
+$app->twig = new Twig_Environment($TwigLoader, $config['twig']['options']);
 $app->twig->addGlobal('base_url', $app->environment['slim.url_scheme'] . '://' . $app->environment['HTTP_HOST'] . $app->environment['SCRIPT_NAME'] . '/');
 
 // csrfp
@@ -31,12 +31,19 @@ $app->psmodgen = new PrestashopModuleGenerator($app->twig);
 $app->highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html());
 $app->highlighter->setLexer(new \FSHL\Lexer\Php());
 
-
 // app routes and controllers
+
+/**
+ * / home 
+ */
 $app->get('/', function () use ($app) {
     echo $app->twig->render('index.html.twig');
 });
 
+/**
+ * /form
+ * form displayed (GET)
+ */
 $app->get('/form', function () use ($app) {
     if($app->getMode() == 'development')
     {
@@ -60,6 +67,10 @@ $app->get('/form', function () use ($app) {
     echo $app->twig->render('form.html.twig', $data );
 });
 
+/**
+ * form
+ * form submitted (POST)
+ */
 $app->post('/form', function () use ($app) {
     if (isset($_POST['generate']) && $app->signer->validateSignature($_POST['_token'])) 
     {
@@ -72,7 +83,7 @@ $app->post('/form', function () use ($app) {
 
         // highlight code and output
         $module_class_code = $app->highlighter->highlight($module_class_code);
-        $app->twig->display('module.html.twig', array('module_class_code' => $module_class_code));
+        echo $app->twig->render('module.html.twig', array('module_class_code' => $module_class_code));
     } 
     else 
     {
@@ -80,8 +91,16 @@ $app->post('/form', function () use ($app) {
     }
 });
 
+/**
+ * /csrfp
+ * csrfp signature
+ */
 $app->get('/csrfp', function () use ($app) {
     echo json_encode(array('csrfp' => htmlspecialchars($app->signer->getSignature())));
 });
 
+
+/**
+ * Action!
+ */
 $app->run();
