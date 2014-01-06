@@ -31,6 +31,13 @@ $app->psmodgen = new PrestashopModuleGenerator($app->twig);
 $app->highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html());
 $app->highlighter->setLexer(new \FSHL\Lexer\Php());
 
+// time spent displayed in debug mode
+if($app->getMode() == 'development')
+{
+    $loader->add('Chrono', __DIR__ . '/../src/');
+    $app->add(new Chrono);
+}
+
 // app routes and controllers
 
 /**
