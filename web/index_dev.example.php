@@ -22,4 +22,4 @@ $loader = require_once APP_DIR.'/vendor/autoload.php';
 $config = require(APP_DIR.'/config/prod.php');
 
 // run app
-require(APP_DIR.'/src/app');
+require(APP_DIR.'/src/app.php');
