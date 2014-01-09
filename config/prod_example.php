@@ -23,5 +23,11 @@ return array(
         ),
         // this allow you to easyly clear twig cache, just opening http://yourpath/clear-cache/<key-defined-bellow>
         'clear_cache_key' => ''
-    )
+    ),
+    'cache' => array(
+        'conditions' => array(
+            'max-age' => 60*60*24*7 // 7 days
+        ),
+        'dir' => __DIR__.'/../var/cache/sebsept/',
+    ),
 );

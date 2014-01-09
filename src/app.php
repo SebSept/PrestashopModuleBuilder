@@ -31,6 +31,15 @@ $app->psmodgen = new PrestashopModuleGenerator($app->twig);
 $app->highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html());
 $app->highlighter->setLexer(new \FSHL\Lexer\Php());
 
+// cache component (file cache)
+$app->cache = new \SebSept\Cache\Cache( 
+        array(
+            'cacheDirectory' => $config['cache']['dir'],
+            'conditions' => $config['cache']['conditions']
+            ) 
+        
+        );
+
 // time spent displayed in debug mode
 if($app->getMode() == 'development')
 {
@@ -44,7 +53,12 @@ if($app->getMode() == 'development')
  * / home 
  */
 $app->get('/', function () use ($app) {
-    echo $app->twig->render('index.html.twig');
+    if(!$data = $app->cache->get('home') )
+    {
+        $data = $app->twig->render('index.html.twig');
+        $app->cache->set('home', $data);
+    }
+    echo $data;
 });
 
 /**
@@ -52,26 +66,33 @@ $app->get('/', function () use ($app) {
  * form displayed (GET)
  */
 $app->get('/form', function () use ($app) {
-    if($app->getMode() == 'development')
+    if(!$data = $app->cache->get('form'))
     {
-        $data = array(
-            'tabs' => $app->psmodgen->getTabs(),
-            'hooks' => $app->psmodgen->getHooks(),
-            'need_instance' => false,
-            'version' => '0.1',
-            'classname' => 'MyModule',
-            'displayname' => 'My module to foo',
-            'description' => 'adds a bar on each fu',
-            'author' => 'Module man'
-            );
-    }
-    else
-        $data = array(
-            'tabs' => $app->psmodgen->getTabs(),
-            'hooks' => $app->psmodgen->getHooks()
-            );
+        if($app->getMode() == 'development')
+        {
+            $data = array(
+                'tabs' => $app->psmodgen->getTabs(),
+                'hooks' => $app->psmodgen->getHooks(),
+                'need_instance' => false,
+                'version' => '0.1',
+                'classname' => 'MyModule',
+                'displayname' => 'My module to foo',
+                'description' => 'adds a bar on each fu',
+                'author' => 'Module man'
+                );
+        }
+        else
+            $data = array(
+                'tabs' => $app->psmodgen->getTabs(),
+                'hooks' => $app->psmodgen->getHooks()
+                );
 
-    echo $app->twig->render('form.html.twig', $data );
+        $data = $app->twig->render('form.html.twig', $data );
+
+        //write to cache
+        $app->cache->set('form', $data);
+    }
+    echo $data;
 });
 
 /**
