@@ -21,3 +21,6 @@ composer.phar
 
 ; customize template files
 ;/templates/custom/
+
+; nodejs
+node_modules/
