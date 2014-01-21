@@ -24,3 +24,6 @@ composer.phar
 
 ; nodejs
 node_modules/
+
+; gruntjs temp files
+/src/css/min/

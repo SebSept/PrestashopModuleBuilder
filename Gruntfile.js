@@ -28,7 +28,7 @@ grunt.initConfig({
       },
       dist: {
         src: ['src/css/min/fshl.css', 'src/css/min/pure.css'],
-        dest: 'web/css/main.js'
+        dest: 'web/css/main.css'
       }
     }
 
