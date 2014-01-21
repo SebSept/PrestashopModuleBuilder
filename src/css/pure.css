@@ -1298,7 +1298,7 @@ this the same font stack that Normalize.css sets for the `body`.
 /*csslint adjoining-classes:false, outline-none:false*/
 /*TODO: Remove this lint rule override after a refactor of this code.*/
 
-
+/*
 .pure-menu ul {
     position: absolute;
     visibility: hidden;
@@ -1359,11 +1359,14 @@ this the same font stack that Normalize.css sets for the `body`.
 }
 
 .pure-menu li a { padding: 5px 20px; }
-
+*/
+/*
 .pure-menu-can-have-children > .pure-menu-label:after {
     content: '\25B8';
     float: right;
+    */
     /* These specific fonts have the Unicode char we need. */
+/* 
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', sans-serif;
     margin-right: -20px;
     margin-top: -1px;
@@ -1385,8 +1388,9 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-menu-hidden {
     display: none;
 }
-
+*/
 /* FIXED MENU */
+/*
 .pure-menu-fixed {
     position: fixed;
     top: 0;
@@ -1394,44 +1398,49 @@ this the same font stack that Normalize.css sets for the `body`.
     width: 100%;
 }
 
-
+*/
 /* HORIZONTAL MENU CODE */
 
 /* Initial menus should be inline-block so that they are horizontal */
+/*
 .pure-menu-horizontal li {
     display: inline-block;
     *display: inline;
     zoom: 1;
     vertical-align: middle;
 }
-
+*/
 /* Submenus should still be display: block; */
+/*
 .pure-menu-horizontal li li {
     display: block;
 }
-
+*/
 /* Content after should be down arrow */
+/*
 .pure-menu-horizontal > .pure-menu-children > .pure-menu-can-have-children > .pure-menu-label:after {
     content: "\25BE";
 }
+*/
 /*Add extra padding to elements that have the arrow so that the hover looks nice */
-.pure-menu-horizontal > .pure-menu-children > .pure-menu-can-have-children > .pure-menu-label {
+/*.pure-menu-horizontal > .pure-menu-children > .pure-menu-can-have-children > .pure-menu-label {
     padding-right: 30px;
 }
-
+*/
 /* Adjusting separator for vertical menus */
+/*
 .pure-menu-horizontal li.pure-menu-separator {
 	height: 50%;
 	width: 1px;
 	margin: 0 7px;
 }
-
+*/
 /* Submenus should be horizontal separator again */
-.pure-menu-horizontal li li.pure-menu-separator {
+/*.pure-menu-horizontal li li.pure-menu-separator {
 	height: 1px;
 	width: auto;
 	margin: 7px 2px;
-}
+}*/
 
 
 /*csslint adjoining-classes:false*/
@@ -1439,21 +1448,21 @@ this the same font stack that Normalize.css sets for the `body`.
 
 /* MAIN MENU STYLING */
 
-.pure-menu.pure-menu-open,
+/*.pure-menu.pure-menu-open,
 .pure-menu.pure-menu-horizontal li .pure-menu-children {
     background: #fff; /* Old browsers */
-    border: 1px solid #b7b7b7;
+ /*   border: 1px solid #b7b7b7;
 }
-
+*/
 /* remove borders for horizontal menus */
-.pure-menu.pure-menu-horizontal,
+/*.pure-menu.pure-menu-horizontal,
 .pure-menu.pure-menu-horizontal .pure-menu-heading {
     border: none;
-}
+}*/
 
 
 /* LINK STYLES */
-
+/*
 .pure-menu a {
     border: 1px solid transparent;
     border-left: none;
@@ -1470,8 +1479,8 @@ this the same font stack that Normalize.css sets for the `body`.
     color: #fff;
 }
 
-/* Focus style for a dropdown menu-item when the parent has been opened */
-.pure-menu .pure-menu-open {
+*//* Focus style for a dropdown menu-item when the parent has been opened */
+/*.pure-menu .pure-menu-open {
     background: #dedede;
 }
 
@@ -1480,9 +1489,9 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-menu li a:focus {
     background: #eee;
 }
-
+*/
 /* DISABLED STATES */
-.pure-menu li.pure-menu-disabled a:hover,
+/*.pure-menu li.pure-menu-disabled a:hover,
 .pure-menu li.pure-menu-disabled a:focus {
     background: #fff;
     color: #bfbfbf;
@@ -1498,9 +1507,9 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-menu .pure-menu-can-have-children.pure-menu-disabled > a:after {
     color: #bfbfbf;
 }
-
+*/
 /* HEADINGS */
-.pure-menu .pure-menu-heading {
+/*.pure-menu .pure-menu-heading {
     color: #565d64;
     text-transform: uppercase;
     font-size: 90%;
@@ -1509,32 +1518,32 @@ this the same font stack that Normalize.css sets for the `body`.
     border-bottom-style: solid;
     border-bottom-color: #dfdfdf;
 }
-
+*/
 /* ACTIVE MENU ITEM */
-.pure-menu .pure-menu-selected a {
+/*.pure-menu .pure-menu-selected a {
     color: #000;
 }
-
+*/
 /* FIXED MENU */
-.pure-menu.pure-menu-open.pure-menu-fixed {
+/*.pure-menu.pure-menu-open.pure-menu-fixed {
     border: none;
     border-bottom: 1px solid #b7b7b7;
 }
-
+*/
 /*csslint box-model:false*/
 /*TODO: Remove this lint rule override after a refactor of this code.*/
 
 
-.pure-paginator {
-
+/*.pure-paginator {
+*/
     /* `pure-g` Grid styles */
-    letter-spacing: -0.31em; /* Webkit: collapse white-space between units */
-    *letter-spacing: normal; /* reset IE < 8 */
-    *word-spacing: -0.43em; /* IE < 8: collapse white-space between units */
-    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+/*    letter-spacing: -0.31em;*/ /* Webkit: collapse white-space between units */
+    /**letter-spacing: normal; *//* reset IE < 8 */
+    /*word-spacing: -0.43em;*/ /* IE < 8: collapse white-space between units */
+    /*text-rendering: optimizespeed;*/ /* Webkit: fixes text-rendering: optimizeLegibility */
 
     /* `pure-paginator` Specific styles */
-    list-style: none;
+/*    list-style: none;
     margin: 0;
     padding: 0;
 }
@@ -1542,12 +1551,12 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-paginator {
     word-spacing: -0.43em;
 }
-
+*/
 /* `pure-u` Grid styles */
-.pure-paginator li {
+/*.pure-paginator li {
     display: inline-block;
-    *display: inline; /* IE < 8: fake inline-block */
-    zoom: 1;
+    *display: inline;*/ /* IE < 8: fake inline-block */
+ /*   zoom: 1;
     letter-spacing: normal;
     word-spacing: normal;
     vertical-align: top;
@@ -1588,9 +1597,9 @@ this the same font stack that Normalize.css sets for the `body`.
     }
 }
 
-.pure-table {
+.pure-table {*/
     /* Remove spacing between table cells (from Normalize.css) */
-    border-collapse: collapse;
+/*    border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
     border: 1px solid #cbcbcb;
@@ -1605,13 +1614,13 @@ this the same font stack that Normalize.css sets for the `body`.
 
 .pure-table td,
 .pure-table th {
-    border-left: 1px solid #cbcbcb;/*  inner column border */
-    border-width: 0 0 0 1px;
+    border-left: 1px solid #cbcbcb;*//*  inner column border */
+    /*border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
-    overflow: visible; /*to make ths where the title is really long work*/
-    padding: 6px 12px; /* cell padding */
-}
+    overflow: visible;*/ /*to make ths where the title is really long work*/
+    /*padding: 6px 12px;*/ /* cell padding */
+/*}
 .pure-table td:first-child,
 .pure-table th:first-child {
     border-left-width: 0;
@@ -1623,37 +1632,37 @@ this the same font stack that Normalize.css sets for the `body`.
     text-align: left;
     vertical-align: bottom;
 }
-
+*/
 /*
 striping:
    even - #fff (white)
    odd  - #f2f2f2 (light gray)
 */
-.pure-table td {
+/*.pure-table td {
     background-color: transparent;
 }
 .pure-table-odd td {
     background-color: #f2f2f2;
 }
-
+*/
 /* nth-child selector for modern browsers */
-.pure-table-striped tr:nth-child(2n-1) td {
+/*.pure-table-striped tr:nth-child(2n-1) td {
     background-color: #f2f2f2;
 }
-
+*/
 /* BORDERED TABLES */
-.pure-table-bordered td {
+/*.pure-table-bordered td {
     border-bottom: 1px solid #cbcbcb;
 }
 .pure-table-bordered tbody > tr:last-child td,
 .pure-table-horizontal tbody > tr:last-child td {
     border-bottom-width: 0;
 }
-
+*/
 
 /* HORIZONTAL BORDERED TABLES */
 
-.pure-table-horizontal td,
+/*.pure-table-horizontal td,
 .pure-table-horizontal th {
     border-width: 0 0 1px 0;
     border-bottom: 1px solid #cbcbcb;
@@ -1661,3 +1670,4 @@ striping:
 .pure-table-horizontal tbody > tr:last-child td {
     border-bottom-width: 0;
 }
+*/

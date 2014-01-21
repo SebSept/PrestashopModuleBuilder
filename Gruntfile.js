@@ -18,18 +18,27 @@ grunt.initConfig({
         expand: true,
         cwd: 'src/css/',
         src: ['*.css', '!*.min.css'],
-        dest: 'web/css/',
+        dest: 'src/css/min/',
         ext: '.css'
+      }
+    },
+    concat: {
+      options: {
+        banner: '/* generated <%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
+      dist: {
+        src: ['src/css/min/fshl.css', 'src/css/min/pure.css'],
+        dest: 'web/css/main.js'
       }
     }
 
   });
 
   // Load the plugin that provides the "uglify" task.
-  //grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['cssmin']);
+  grunt.registerTask('default', ['cssmin', 'concat']);
 
 };
