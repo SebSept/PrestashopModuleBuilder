@@ -32,10 +32,10 @@ $app->highlighter = new \FSHL\Highlighter(new \FSHL\Output\Html());
 $app->highlighter->setLexer(new \FSHL\Lexer\Php());
 
 // cache component (file cache)
-$app->cache = new \SebSept\Cache\Cache( 
+$app->cache = new \SebSept\SimpleFileCache\Cache( 
         array(
-            'cacheDirectory' => $config['cache']['dir'],
-            'conditions' => $config['cache']['conditions']
+            'directoryPath' => $config['cache']['directoryPath'],
+            'delay' => $config['cache']['delay']
             ) 
         
         );
