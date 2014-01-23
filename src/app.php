@@ -8,7 +8,7 @@
  */
 
 // register PrestashopModuleGenerator in composer loader
-$loader->add('PrestashopModuleGenerator', __DIR__ . '/../src/');
+$loader->add('PrestashopModuleGenerator', __DIR__ . '/../lib/');
 
 // create app
 $app = new \Slim\Slim($config['slim']);
@@ -43,7 +43,7 @@ $app->cache = new \SebSept\SimpleFileCache\Cache(
 // time spent displayed in debug mode
 if($app->getMode() == 'development')
 {
-    $loader->add('Chrono', __DIR__ . '/../src/');
+    $loader->add('Chrono', __DIR__ . '/../lib/');
     $app->add(new Chrono);
 }
 
